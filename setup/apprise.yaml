@@ -83,6 +83,16 @@ MSTEAMS_TOKENA: ""
 MSTEAMS_TOKENB: ""
 MSTEAMS_TOKENC: ""
 
+## MMOSTS Settings
+## Format: mmosts://{botname}@{hostname}:{port}/{path}/token?channels={channel}
+## Only MMOSTS_HOST and MMOSTS_TOKEN are required, others are optional
+MMOSTS_HOST: ""  # Required: The hostname of your MMOSTS server
+MMOSTS_TOKEN: ""  # Required: Your MMOSTS authentication token
+MMOSTS_BOTNAME: ""  # Optional: The bot name to use
+MMOSTS_PORT: ""  # Optional: The port number (if different from default)
+MMOSTS_PATH: ""  # Optional: Additional path components
+MMOSTS_CHANNELS: ""  # Optional: Comma-separated list of channels to notify
+
 ## NEXTCLOUD SETTINGS
 ## All of these are required || leave NEXTCLOUD_HOST blank to disable
 ## TODO: This might need  X-Token headers set. Append "?-X-Token=key" to utils.py

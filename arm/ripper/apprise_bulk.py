@@ -4,6 +4,41 @@ import yaml
 import apprise
 
 
+def build_mmosts_url(cfg):
+    """
+    Build MMOSTS URL with optional parameters
+    Format: mmosts://{botname}@{hostname}:{port}/{path}/token?channels={channel}
+    All parameters except hostname and token are optional
+    :param cfg: apprise.yaml loaded as dict
+    :return: formatted MMOSTS URL
+    """
+    url = 'mmosts://'
+    
+    # Add botname if provided
+    if 'MMOSTS_BOTNAME' in cfg and cfg['MMOSTS_BOTNAME']:
+        url += str(cfg['MMOSTS_BOTNAME']) + '@'
+    
+    # Add hostname (required)
+    url += str(cfg['MMOSTS_HOST'])
+    
+    # Add port if provided
+    if 'MMOSTS_PORT' in cfg and cfg['MMOSTS_PORT']:
+        url += ':' + str(cfg['MMOSTS_PORT'])
+    
+    # Add path if provided
+    if 'MMOSTS_PATH' in cfg and cfg['MMOSTS_PATH']:
+        url += '/' + str(cfg['MMOSTS_PATH'])
+    
+    # Add token (required)
+    url += '/' + str(cfg['MMOSTS_TOKEN'])
+    
+    # Add channels if provided
+    if 'MMOSTS_CHANNELS' in cfg and cfg['MMOSTS_CHANNELS']:
+        url += '?channels=' + str(cfg['MMOSTS_CHANNELS'])
+    
+    return url
+
+
 # TODO: Refactor this to leverage apprise_config stored in config.py
 def build_apprise_sent(cfg):
     """
@@ -23,6 +58,7 @@ def build_apprise_sent(cfg):
                           + str(cfg['MAILGUN_APIKEY']),
         'MSTEAMS_TOKENA': 'msteams://' + str(cfg['MSTEAMS_TOKENA']) + "/" + str(cfg['MSTEAMS_TOKENB']) + "/" + str(
             cfg['MSTEAMS_TOKENC']) + "/",
+        'MMOSTS_HOST': build_mmosts_url(cfg),
         'NEXTCLOUD_HOST': 'nclouds://' + str(cfg['NEXTCLOUD_ADMINUSER']) + ":" + str(cfg['NEXTCLOUD_ADMINPASS'])
                           + "@" + str(cfg['NEXTCLOUD_HOST']) + "/" + str(cfg['NEXTCLOUD_NOTIFY_USER']),
         'NOTICA_TOKEN': 'notica://' + str(cfg['NOTICA_TOKEN']),
