@@ -36,6 +36,9 @@ jobs:
             -
                 name: Checkout repository
                 uses: actions/checkout@v4
+                with:
+                    fetch-depth: 0
+                    fetch-tags: true
 
             -
                 name: Get branch name
@@ -112,10 +115,6 @@ jobs:
                       ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.TAG }}
                       ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
                     labels: ${{ steps.meta.outputs.labels }}
-                  # Fetches all tags for the repo
-            - 
-                name: Fetch tags
-                run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
             -
                 name: 'Check: version has corrosponding git tag'
                 id: tagged
