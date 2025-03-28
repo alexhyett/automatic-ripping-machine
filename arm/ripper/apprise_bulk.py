@@ -13,29 +13,29 @@ def build_mmosts_url(cfg):
     :return: formatted MMOSTS URL
     """
     url = 'mmosts://'
-    
+
     # Add botname if provided
     if 'MMOSTS_BOTNAME' in cfg and cfg['MMOSTS_BOTNAME']:
         url += str(cfg['MMOSTS_BOTNAME']) + '@'
-    
+
     # Add hostname (required)
     url += str(cfg['MMOSTS_HOST'])
-    
+
     # Add port if provided
     if 'MMOSTS_PORT' in cfg and cfg['MMOSTS_PORT']:
         url += ':' + str(cfg['MMOSTS_PORT'])
-    
+
     # Add path if provided
     if 'MMOSTS_PATH' in cfg and cfg['MMOSTS_PATH']:
         url += '/' + str(cfg['MMOSTS_PATH'])
-    
+
     # Add token (required)
     url += '/' + str(cfg['MMOSTS_TOKEN'])
-    
+
     # Add channels if provided
     if 'MMOSTS_CHANNELS' in cfg and cfg['MMOSTS_CHANNELS']:
         url += '?channels=' + str(cfg['MMOSTS_CHANNELS'])
-    
+
     return url
 
 
